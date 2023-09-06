@@ -10,6 +10,12 @@
     },
     "principalId": {
       "value": "${AZURE_PRINCIPAL_ID}"
+    },
+    "systemPoolSize": {
+      "value": "${AZURE_SYSTEM_POOL_SIZE}"
+    },
+    "agentPoolSize": {
+      "value": "${AZURE_AGENT_POOL_SIZE}"
     }
   }
 }

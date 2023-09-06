@@ -9,6 +9,8 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
+param architecture string
+
 // Optional parameters to override the default azd resource naming conventions. Update the main.parameters.json file to provide values. e.g.,:
 // "resourceGroupName": {
 //      "value": "myGroupName"
@@ -27,16 +29,37 @@ param keyVaultName string = ''
 param logAnalyticsName string = ''
 param resourceGroupName string = ''
 
+// set pool size from main.parameters.json using env variables
+@allowed([
+  'CostOptimised'
+  'Standard'
+  'HighSpec'
+  'Custom'
+  'ARM64'
+])
+param systemPoolSize string 
+
+@allowed([
+  ''
+  'CostOptimised'
+  'Standard'
+  'HighSpec'
+  'Custom'
+  'ARM64'
+])
+param agentPoolSize string 
+
+
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
 
 var abbrs = loadJsonContent('./abbreviations.json')
-var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
+var resourceToken = '${toLower(uniqueString(subscription().id, environmentName, location))}'
 var tags = { 'azd-env-name': environmentName }
 
 // Organize resources in a resource group
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
+  name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}${'-'}${architecture}'
   location: location
   tags: tags
 }
@@ -51,6 +74,8 @@ module aks './core/host/aks.bicep' = {
     containerRegistryName: !empty(containerRegistryName) ? containerRegistryName : '${abbrs.containerRegistryRegistries}${resourceToken}'
     logAnalyticsName: monitoring.outputs.logAnalyticsWorkspaceName
     keyVaultName: keyVault.outputs.name
+    systemPoolType: systemPoolSize
+    agentPoolType: agentPoolSize
   }
 }
 

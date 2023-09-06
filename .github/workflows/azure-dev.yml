@@ -24,6 +24,8 @@ jobs:
       AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      AZURE_AGENT_POOL_SIZE: ${{ vars.AZURE_AGENT_POOL_SIZE }}
+      AZURE_ARCHITECTURE: ${{ vars.AZURE_ARCHITECTURE }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -34,7 +36,7 @@ jobs:
       - name: Install Nodejs
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: latest
 
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
@@ -65,6 +67,8 @@ jobs:
           AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
           AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          AZURE_AGENT_POOL_SIZE: ${{ vars.AZURE_AGENT_POOL_SIZE }}
+          AZURE_ARCHITECTURE: ${{ vars.AZURE_ARCHITECTURE }}
 
       - name: Deploy Application
         run: azd deploy --no-prompt
@@ -72,3 +76,5 @@ jobs:
           AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
           AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          AZURE_AGENT_POOL_SIZE: ${{ vars.AZURE_AGENT_POOL_SIZE }}
+          AZURE_ARCHITECTURE: ${{ vars.AZURE_ARCHITECTURE }}

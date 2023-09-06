@@ -50,6 +50,7 @@ param addOns object = {
   'Standard'
   'HighSpec'
   'Custom'
+  'ARM64'
 ])
 @description('The System Pool Preset sizing')
 param systemPoolType string = 'CostOptimised'
@@ -60,6 +61,7 @@ param systemPoolType string = 'CostOptimised'
   'Standard'
   'HighSpec'
   'Custom'
+  'ARM64'
 ])
 @description('The User Pool Preset sizing')
 param agentPoolType string = ''
@@ -187,6 +189,18 @@ var nodePoolPresets = {
   }
   HighSpec: {
     vmSize: 'Standard_D4s_v3'
+    count: 3
+    minCount: 3
+    maxCount: 5
+    enableAutoScaling: true
+    availabilityZones: [
+      '1'
+      '2'
+      '3'
+    ]
+  }
+  ARM64: {
+    vmSize: 'Standard_D4ps_v5'
     count: 3
     minCount: 3
     maxCount: 5
