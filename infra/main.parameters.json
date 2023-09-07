@@ -12,7 +12,7 @@
       "value": "${AZURE_PRINCIPAL_ID}"
     },
     "systemPoolSize": {
-      "value": "${AZURE_SYSTEM_POOL_SIZE}"
+      "value": "ARM64"
     },
     "agentPoolSize": {
       "value": "ARM64"
