@@ -15,10 +15,10 @@
       "value": "${AZURE_SYSTEM_POOL_SIZE}"
     },
     "agentPoolSize": {
-      "value": "${AZURE_AGENT_POOL_SIZE}"
+      "value": "ARM64"
     },
     "architecture": {
-      "value": "${AZURE_ARCHITECTURE}"
+      "value": "ARM64"
     }
   }
 }
