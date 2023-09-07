@@ -16,6 +16,9 @@
     },
     "agentPoolSize": {
       "value": "${AZURE_AGENT_POOL_SIZE}"
+    },
+    "architecture": {
+      "value": "${AZURE_ARCHITECTURE}"
     }
   }
 }
