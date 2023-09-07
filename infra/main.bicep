@@ -37,7 +37,7 @@ param resourceGroupName string = ''
   'Custom'
   'ARM64'
 ])
-param systemPoolSize string 
+param systemPoolSize string = 'ARM64'
 
 @allowed([
   ''
@@ -47,7 +47,7 @@ param systemPoolSize string
   'Custom'
   'ARM64'
 ])
-param agentPoolSize string 
+param agentPoolSize string = 'ARM64'
 
 
 @description('Id of the user or app to assign application roles')
