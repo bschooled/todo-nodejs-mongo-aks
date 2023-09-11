@@ -9,6 +9,10 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
+@allowed(
+  ['x64'
+  'arm64']
+)
 param architecture string
 
 // Optional parameters to override the default azd resource naming conventions. Update the main.parameters.json file to provide values. e.g.,:
@@ -37,7 +41,7 @@ param resourceGroupName string = ''
   'Custom'
   'ARM64'
 ])
-param systemPoolSize string = 'ARM64'
+param systemPoolSize string
 
 @allowed([
   ''
@@ -47,7 +51,7 @@ param systemPoolSize string = 'ARM64'
   'Custom'
   'ARM64'
 ])
-param agentPoolSize string = 'ARM64'
+param agentPoolSize string
 
 
 @description('Id of the user or app to assign application roles')
