@@ -1,3 +1,4 @@
+FROM node:18-alpine AS build
 FROM --platform=$BUILDPLATFORM node:lts-alpine AS build
 
 # make the 'app' folder the current working directory
