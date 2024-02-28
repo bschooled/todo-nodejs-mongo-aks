@@ -204,7 +204,7 @@ var nodePoolPresets = {
     vmSize: 'Standard_D2s_v5'
     count: 1
     minCount: 1
-    maxCount: 5
+    maxCount: 6
     enableAutoScaling: true
     availabilityZones: [
       '1'
@@ -216,7 +216,7 @@ var nodePoolPresets = {
     vmSize: 'Standard_D2ps_v5'
     count: 1
     minCount: 1
-    maxCount: 5
+    maxCount: 6
     enableAutoScaling: true
     availabilityZones: [
       '1'
