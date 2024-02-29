@@ -154,21 +154,8 @@ module managedCluster 'aks-managed-cluster.bicep' = {
       nodePoolBase,
       systemPoolSpec
     )
-    nodeResourceGroupName: nodeResourceGroupName
-    sku: sku
-    dnsPrefix: dnsPrefix
-    kubernetesVersion: kubernetesVersion
     addOns: addOnsConfig
     workspaceId: !empty(logAnalyticsName) ? logAnalytics.id : ''
-    enableAad: enableAzureRbac && aadTenantId != ''
-    disableLocalAccounts: disableLocalAccounts
-    aadTenantId: aadTenantId
-    enableRbac: enableRbac
-    enableAzureRbac: enableAzureRbac
-    webAppRoutingAddon: webAppRoutingAddon
-    loadBalancerSku: loadBalancerSku
-    networkPlugin: networkPlugin
-    networkPolicy: networkPolicy
   }
 }
 
@@ -202,15 +189,6 @@ module containerRegistryAccess '../security/registry-access.bicep' = {
   params: {
     containerRegistryName: containerRegistry.outputs.name
     principalId: managedCluster.outputs.clusterIdentity.objectId
-  }
-}
-
-// Give AKS cluster access to the specified principal
-module clusterAccess '../security/aks-managed-cluster-access.bicep' = if (enableAzureRbac || disableLocalAccounts) {
-  name: 'cluster-access'
-  params: {
-    clusterName: managedCluster.outputs.clusterName
-    principalId: principalId
   }
 }
 
