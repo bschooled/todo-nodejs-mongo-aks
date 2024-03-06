@@ -12,6 +12,15 @@ spec:
       labels:
         app: todo-web
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: userpoolassign
+                operator: In
+                values:
+                - "true"
       containers:
         - name: todo-web
           image: {{.Env.SERVICE_WEB_IMAGE_NAME}}

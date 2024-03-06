@@ -12,6 +12,15 @@ spec:
       labels:
         app: todo-api
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: userpoolassign
+                operator: In
+                values:
+                - "true"
       containers:
         - name: todo-api
           image: {{.Env.SERVICE_API_IMAGE_NAME}}

@@ -152,7 +152,6 @@ module managedCluster 'aks-managed-cluster.bicep' = {
     systemPoolConfig: union(
       { name: 'npsystem', mode: 'System' },
       nodePoolBase,
-      systemPoolTaints,
       systemPoolSpec
     )
     addOns: addOnsConfig
@@ -169,7 +168,7 @@ module agentPool 'aks-agent-pool.bicep' = if (hasAgentPool) {
   params: {
     clusterName: managedCluster.outputs.clusterName
     name: 'npuserpool'
-    config: union({ name: 'npuser', mode: 'User' }, 
+    config: union({ name: 'npuser', mode: 'User', nodeLabels: { userpoolassign: 'true' } }, 
     nodePoolBase, 
     agentPoolSpec
     )
@@ -213,16 +212,6 @@ var nodePoolBase = {
   upgradeSettings: {
     maxSurge: '33%'
   }
-}
-
-var systemPoolTaints = {
-  nodetaints: [
-    {
-      effect: 'CriticalAddonsOnly'
-      key: 'node.kubernetes.io/system-agent-pool'
-      value: 'true'
-    }
-  ]
 }
 
 var nodePoolPresets = {
