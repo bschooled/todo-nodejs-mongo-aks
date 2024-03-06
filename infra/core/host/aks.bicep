@@ -248,9 +248,9 @@ var nodePoolPresets = {
     ]
   }
   Custom: {
-    vmSize: 'Standard_D2s_v5'
+    vmSize: 'Standard_D8s_v5'
     count: 1
-    minCount: 1
+    minCount: 2
     maxCount: 6
     enableAutoScaling: true
     availabilityZones: [
@@ -260,9 +260,9 @@ var nodePoolPresets = {
     ]
   }
   ARM64: {
-    vmSize: 'Standard_D2ps_v5'
+    vmSize: 'Standard_D8ps_v5'
     count: 1
-    minCount: 1
+    minCount: 2
     maxCount: 6
     enableAutoScaling: true
     availabilityZones: [
